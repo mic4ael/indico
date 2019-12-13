@@ -1,0 +1,15 @@
+name: Build & Publish Indico Docker image
+on:
+  push:
+    tags:
+      - 'v\d+.[2-9]+.\d+'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        repository: indico/indico-containers
+        ref: refs/heads/master
+    - name: Build the Docker image
+      run: "cd ~/work/indico/indico-containers;sh ./build_latest.sh"
